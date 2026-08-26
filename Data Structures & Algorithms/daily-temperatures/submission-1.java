@@ -1,0 +1,34 @@
+class Solution {
+    public int[] dailyTemperatures(int[] temperatures) {
+        
+        int[] result = new int[temperatures.length];
+
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i = 0; i < temperatures.length; i++){
+
+           while(!stack.isEmpty() && (temperatures[i] > temperatures[stack.peek()])){
+
+                int waitingDays = i - stack.peek();
+                
+                result[stack.peek()] = waitingDays;
+
+                stack.pop();
+
+            
+           }
+           stack.push(i);
+
+        }
+
+        while(!stack.isEmpty()){
+
+            result[stack.peek()] = 0;
+            stack.pop();
+
+        }
+       
+        return result;
+
+    }
+}
